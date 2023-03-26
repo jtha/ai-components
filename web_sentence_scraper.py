@@ -1,3 +1,11 @@
+# TODO: Add a progress bar to show the progress of the scraping process.
+# TODO: Add a function to further clean the text, replacing special characters with their English equivalents.
+# TODO: Make the script more robust by adding error handling.
+# TODO: Add a function to extract the title of the webpage.
+# TODO: Make the script more efficient by using multithreading.
+# TODO: Make the whole script into a function that can be called from another script.
+# TODO: Add a function to automatically detect the content container.
+
 import csv
 import time
 from urllib.parse import urljoin
