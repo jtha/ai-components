@@ -3,7 +3,7 @@
 # TODO: Make the script more robust by adding error handling.
 # TODO: Add a function to extract the title of the webpage.
 # TODO: Make the script more efficient by using multithreading.
-# TODO: Make the whole script into a function that can be called from another script.
+# TODO: Make the whole script into a function that can be called from another script, which sets the parameters 'url', 'sleep_time', and 'text_container'.
 # TODO: Add a function to automatically detect the content container.
 
 import csv
