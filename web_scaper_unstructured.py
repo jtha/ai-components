@@ -44,11 +44,11 @@ def save_page(url):
     time.sleep(sleep_time)
 
 
-def worker(url):
-    for link in links:
-        if is_valid_url(link):
-            save_page(link)
-            print(link)
+def worker(chunks):
+    for chunks in chunks:
+        if is_valid_url(chunks):
+            save_page(chunks)
+            print(chunks)
 
 
 # get all links from the webpage
@@ -61,28 +61,23 @@ for element in links:
 print("Total links:" + str(len(links)))
 print("Unique links:" + str(len(unique_links)))
 
-for l in unique_links:
-    print(l)
-
 # Split the URLs into 4 equal parts
-chunk_size = len(unique_links) // num_threads
-chunks = [unique_links[i:i+chunk_size] for i in range(0, chunk_size * num_threads, chunk_size)]
+for l in unique_links:
+    chunk_size = len(unique_links) // num_threads
+    chunks = [unique_links[i:i+chunk_size] for i in range(0, chunk_size * num_threads, chunk_size)]
 
+# Create a list of threads
 for l in chunks:
-    print(len(l))
+    threads = []
 
+# Create and start 4 threads, one for each chunk
+for i in range(num_threads):
+    t = threading.Thread(target=worker, args=(chunks[i],))
+    threads.append(t)
+    t.start()
 
-# # Create a list of threads
-# threads = []
-#
-# # Create and start 4 threads, one for each chunk
-# for i in range(num_threads):
-#     t = threading.Thread(target=worker, args=(chunks[i],))
-#     threads.append(t)
-#     t.start()
-#
-# # Wait for all threads to finish
-# for t in threads:
-#     t.join()
-#
-# print("All workers have completed")
+# Wait for all threads to finish
+for t in threads:
+    t.join()
+
+print("All workers have completed")
